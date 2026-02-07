@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional TikTok-style Feed</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  background: #000;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  font-family: Arial, sans-serif;
+}
+.feed { display: flex; flex-direction: column; }
+.post {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+}
+.overlay {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.follow-btn {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.actions {
+  position: absolute;
+  right: 20px;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+.actions button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+.actions .number {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.comment-box {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+.comment-box img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.comment-box input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+@media screen and (max-width: 768px) {
+  .profile img, .comment-box img { width: 40px; height: 40px; }
+  .actions .number { font-size: 12px; }
+  .comment-box input { font-size: 14px; padding: 6px; }
+}
+</style>
+</head>
+<body>
+<div class="feed">
+<script>
+const posts = [];
+const imageLink = 'https://i.postimg.cc/ZYctNLTG/625031565-2330206677483943-7733189473594700973-n.jpg';
+const names = ['Alice','Bob','Charlie','David','Eve'];
+for(let i=0;i<5;i++){
+  const like = (Math.random()*1000).toFixed(1) + 'k';
+  const comment = (Math.random()*500).toFixed(1) + 'k';
+  const save = (Math.random()*300).toFixed(1) + 'k';
+  const name = names[i];
+  document.write(`
+    <div class="post" style="background-image: url('${imageLink}');">
+      <div class="overlay">
+        <div class="profile">
+          <img src='${imageLink}' alt='Profile'>
+          <span>${name}</span>
+          <button class='follow-btn'>Follow</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button>Like<span class='number'>${like}</span></button>
+        <button>Comment<span class='number'>${comment}</span></button>
+        <button>Share<span class='number'>0</span></button>
+        <button>Save<span class='number'>${save}</span></button>
+      </div>
+      <div class="comment-box">
+        <img src='${imageLink}' alt='Profile'>
+        <input type='text' placeholder='Add a comment...'>
+      </div>
+    </div>
+  `);
+}
+</script>
+</div>
+</body>
+</html>
